@@ -14,9 +14,18 @@
  *= require jquery.dataTables
  *= require dataTables.bootstrap
  *= require buttons.dataTables.min
+ *= require darkblue
+ *= require simple-line-icons.min
+ *= require bootstrap.min
+ *= require uniform.default
+ *= require bootstrap-switch.min
+ *= require select2
+ *= require components
+ *= require plugins
+ *= require layout
+ *= require custom
  *= require_self
  */
 
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import 'bootstrap/theme';
+@import "font-awesome-sprockets";
+@import "font-awesome";

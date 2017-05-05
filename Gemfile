@@ -23,6 +23,7 @@ gem 'devise'
 gem 'acts_as_tenant'
 gem 'pg'
 gem 'bootstrap-sass'
+gem 'font-awesome-sass'
 
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 # Use jquery as the JavaScript library
