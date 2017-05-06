@@ -10,6 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
+    current_tenant.users if current_tenant.present?
   end
 
   # GET /resource/edit

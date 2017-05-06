@@ -42,6 +42,8 @@ gem 'will_paginate'
 
 gem 'omniauth-twitter'
 
+gem 'tweetstream'
+
 gem 'jquery-turbolinks'
 
 group :development, :test do

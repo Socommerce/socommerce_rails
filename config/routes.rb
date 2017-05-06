@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-        sessions: 'users/sessions'
+        sessions: 'users/sessions',
+        registrations: 'users/registrations'
       }
   devise_scope :user do
-    get 'sign_in', to: 'devise/sessions#new'
+    get 'sign_in', to: 'users/sessions#new'
   end
   resources :orders
   root 'orders#index'
 
 
-  #get '/auth/:provider/callback'
+  get '/auth/:provider/callback', to: 'twitter#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
