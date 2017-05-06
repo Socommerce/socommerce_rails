@@ -41,7 +41,7 @@ client.userstream do |status|
       )
   puts @result
   @data = status.text.split(",")
-  if(@data.length > 1)
+  if(status.text.include?('@anbullavignesh') && (@data.length > 2))
    Order.create(name: @data[0], movie_name: @data[0].sub!("@anbullavignesh"," "),theatre_name: @data[1], no_of_seats: @data[2], time: @data[3])
   end
   puts JSON.parse(status)
