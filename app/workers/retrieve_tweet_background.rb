@@ -12,8 +12,8 @@ class RetrieveTweetBackground
 TweetStream.configure do |conf|
   conf.consumer_key        = 'a0UmBU7AHn0fFneQ10zYwP0Kk'
   conf.consumer_secret     = 'JZEqUgKJsTrYjjvYv1wO4jtrNpy50pwoTUwr4UAro3pPxS7Hhw'
-  conf.oauth_token         = '3139928784-B7kPZz6zLAe1M9bTFI29dSfhU6J6Fi9mNdOmhqC'
-  conf.oauth_token_secret  = 'f6cGgOSBU78IPjHz7lDCiOfv4zS4K90OepO2x2355JFqS'
+  conf.oauth_token         = '3139928784-rExJZIOTg77V1833ptq7YKbMq4rfok8y4AnIkfd'
+  conf.oauth_token_secret  = 'Z8USEigXd6l1KwCywJ9oH3inoQha3zRSNUCSdrxv25tBz'
   conf.auth_method         = :oauth
 end
 
