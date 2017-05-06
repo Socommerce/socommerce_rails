@@ -35,7 +35,7 @@ client = TweetStream::Client.new
 client.userstream do |status|
   puts status.text
   @result = HTTParty.post(
-      "http://0e819fc5.ngrok.io/api/publicstream", 
+      "https://socommercenodejs.herokuapp.com/api/publicstream", 
       :headers => { 'Content-Type' => 'application/json' },
       :body => tweet_data(status.text).to_json
       )
