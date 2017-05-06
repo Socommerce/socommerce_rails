@@ -32,7 +32,7 @@ private
   end
 
   def fetch_orders
-    orders = Order.order("#{sort_column} #{sort_direction}")
+    orders = Order.order("#{sort_column} #{sort_direction}").uniq
     orders = orders.page(page).per_page(per_page)
     if params[:sSearch].present?
       orders = orders.where("name like :search or description like :search", search: "%#{params[:sSearch]}%")
