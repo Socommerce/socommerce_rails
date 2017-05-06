@@ -40,10 +40,9 @@ client.userstream do |status|
       :body => tweet_data(status.text).to_json
       )
   puts @result
-
   @data = status.text.split(",")
   if(@data.length > 1)
-   Order.create(name: @data[0], movie_name: @data[0].replace("@anbullavignesh",""),theatre_name: @data[1], no_of_seats: @data[2], time: @data[3])
+   Order.create(name: @data[0], movie_name: @data[0].sub!("@anbullavignesh"," "),theatre_name: @data[1], no_of_seats: @data[2], time: @data[3])
   end
   puts JSON.parse(status)
 end
