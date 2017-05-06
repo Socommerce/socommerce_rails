@@ -9,8 +9,8 @@ default: &default
   adapter: postgresql
   pool: 5
   encoding: unicode
-  username: socommerce
-  password: root
+  username: root
+  password: password
   host: localhost
   # timeout: 5000
 
