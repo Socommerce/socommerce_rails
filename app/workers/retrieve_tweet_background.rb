@@ -39,7 +39,7 @@ client.userstream do |status|
   if(status.text.include?('@anbullavignesh') && (@data.length > 2))
    puts "creating order"
    Order.create(name: @data[0], movie_name: @data[0].sub!("@anbullavignesh"," "),theatre_name: @data[1], no_of_seats: @data[2], time: @data[3])   
-   message = "Your ticket has been booked, click on the link below to check your ticket status and for other offers. http://localhost:3000/orders/track_order"
+   message = "Your ticket has been booked, click on the link below to check your ticket status and for other offers. https://socommerce.herokuapp.com/orders/track_order"
    cli = initialize_rest_api
    send_message @user_id, message, cli
   end
@@ -47,15 +47,16 @@ client.userstream do |status|
   @result = HTTParty.post(
       "https://socommercenodejs.herokuapp.com/api/publicstream", 
       :headers => { 'Content-Type' => 'application/json' },
-      :body => tweet_data(status.text).to_json
+      :body => tweet_data(status.text, @user_id).to_json
       )
   puts @result
 end
   end
 
-  def tweet_data tweet
+  def tweet_data tweet, id
     {
-      "tweet_detail": tweet
+      "tweet_detail": tweet,
+      "user_id": id
     }
   end
 
