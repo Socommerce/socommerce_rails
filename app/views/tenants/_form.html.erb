@@ -1,0 +1,39 @@
+<div class="container">
+<%= form_for :tenant, url: tenants_path do |f| %>
+  <div class="col-md-6">
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class: 'form-control required', required: true %>
+  </p>
+ 
+ <p>
+    <%= f.label :subdomain %><br>
+    <%= f.text_field :subdomain, class: 'form-control required', required: true %>
+  </p>
+ 
+ <p>
+    <%= f.label :company_email %><br>
+    <%= f.text_field :company_email, class: 'form-control required', required: true %>
+  </p>
+ 
+ <p>
+    <%= f.label :company_phone %><br>
+    <%= f.text_field :company_phone, class: 'form-control required', required: true %>
+  </p>
+ 
+ <p>
+    <%= f.label :password %><br>
+    <%= f.password_field :password, class: 'form-control required', required: true %>
+  </p>
+ 
+  <p>
+    <%= f.label :confirm_password %><br>
+    <%= f.password_field :confirm_password, class: 'form-control required', required: true %>
+  </p>
+ 
+  <p>
+    <%= f.submit 'Add Tenant', class: 'btn btn-primary' %>
+  </p>
+  </div>
+<% end %>
+</div>
