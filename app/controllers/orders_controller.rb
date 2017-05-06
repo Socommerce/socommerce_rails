@@ -6,4 +6,8 @@ class OrdersController < ApplicationController
      format.json { render json: OrdersDatatable.new(view_context) }
     end
   end
+
+  def track_order
+    # render nothing: true
+  end
 end

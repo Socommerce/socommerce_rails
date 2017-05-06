@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/orders/track_order', to: 'orders#track_order'
+  
   devise_for :users, controllers: {
         sessions: 'users/sessions',
         registrations: 'users/registrations'
@@ -12,6 +14,7 @@ Rails.application.routes.draw do
 
 
   get '/auth/:provider/callback', to: 'users#update_twitter_tokens'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
