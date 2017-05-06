@@ -19,8 +19,10 @@ private
   def data
     orders.map do |order|
       [
-        link_to(order.name, order),
-        order.description,
+        order.movie_name,
+        order.theatre_name,
+        order.no_of_seats,
+        order.time
       ]
     end
   end

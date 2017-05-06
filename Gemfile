@@ -32,6 +32,12 @@ gem 'jquery-rails', "~> 2.3.0"
 
 gem 'will_paginate'
 
+# Background Jobs
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'httparty'
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -60,4 +66,3 @@ group :development, :test do
 
   gem 'sqlite3'
 end
-

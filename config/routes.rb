@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   get '/auth/:provider/callback', to: 'users#update_twitter_tokens'
 
+  mount Sidekiq::Web, at: '/sidekiq'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
