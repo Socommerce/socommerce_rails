@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   def index
     @tenant = current_tenant
-    # RetrieveTweetBackground.perform_in(2.seconds)
+    RetrieveTweetBackground.perform_in(2.seconds)
     respond_to do |format|
      format.html
      format.json { render json: OrdersDatatable.new(view_context) }
@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
   end
 
   def track_order
+    Order.create(name: 'test')
     # render nothing: true
   end
 end
