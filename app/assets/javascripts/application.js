@@ -33,4 +33,6 @@
 //= require quick-sidebar
 //= require demo
 //= require form-wizard
+//= require jquery.turbolinks
+//= require bootstrap/dropdown
 //= require_tree .
