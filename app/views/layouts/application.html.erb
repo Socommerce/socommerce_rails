@@ -45,7 +45,17 @@
        <h1>Welcome!</h1>
        <p>Register to get started.</p>
        <p>
-         <%= link_to 'Register', new_tenant_path, class: 'btn btn-primary btn-lg' %>
+         <%= link_to 'Register', '/users/sign_up', class: 'btn btn-primary btn-lg' %>
+       </p>
+     </div>
+   </div>
+<% elsif !current_user.twitter_id.present?%>
+
+  <div class="jumbotron">
+     <div class="container">
+       <p>Authenticate your twitter to get started.</p>
+       <p>
+         <%= link_to 'Authenticate', '/auth/twitter', class: 'btn btn-primary btn-lg' %>
        </p>
      </div>
    </div>
@@ -61,7 +71,6 @@
 
  <div id="footer">
   <div class="container">
-    <%= link_to 'Twitter', '/auth/twitter' %>
     <p class="text-muted">Created by <a href="#" target="_blank">SoCommerce</a></p>
 </div>
 </div>

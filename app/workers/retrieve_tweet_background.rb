@@ -26,7 +26,7 @@ end
 #   binding.pry
 #   puts status.text
 # end
-    tenant_user_id = 3139928784
+    tenant_user_id = current_user.twitter_id.to_i
     client = TweetStream::Client.new  
     # daemon.on_inited do
     #   ActiveRecord::Base.connection.reconnect!
@@ -35,6 +35,8 @@ end
     # client.userstream do |status|
     TweetStream::Client.new.follow(tenant_user_id) do |status|
       puts status.text
+      puts status.user.id
+      puts "Requesting node"
       @user_id = status.user.id  
       @result = HTTParty.post(
           "https://socommercenodejs.herokuapp.com/api/publicstream", 
