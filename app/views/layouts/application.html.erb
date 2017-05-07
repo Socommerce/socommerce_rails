@@ -39,6 +39,7 @@
    </div>
  </nav>
  
+ <% if !user_signed_in? %>
  <div class="jumbotron">
      <div class="container">
        <h1>Welcome!</h1>
@@ -48,6 +49,7 @@
        </p>
      </div>
    </div>
+<% end %>
  
  <% flash.each do |key, value| %>
     <div class="alert alert-<%= key %>">
