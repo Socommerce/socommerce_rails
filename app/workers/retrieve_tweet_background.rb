@@ -26,31 +26,32 @@ end
 #   binding.pry
 #   puts status.text
 # end
-
-client = TweetStream::Client.new  
-# daemon.on_inited do
-#   ActiveRecord::Base.connection.reconnect!
-#   ActiveRecord::Base.logger = Logger.new(File.open(log, 'a'))
-# end
-client.userstream do |status|
-  puts status.text
-  @user_id = status.user.id  
-  @data = status.text.split(",")
-  if(status.text.include?('@anbullavignesh') && (@data.length > 2))
-   puts "creating order"
-   Order.create(name: @data[0], movie_name: @data[0].sub!("@anbullavignesh"," "),theatre_name: @data[1], no_of_seats: @data[2], time: @data[3])   
-   message = "Your ticket has been booked, click on the link below to check your ticket status and for other offers. https://socommerce.herokuapp.com/orders/track_order"
-   cli = initialize_rest_api
-   send_message @user_id, message, cli
-  end
-  puts JSON.parse(status)
-  @result = HTTParty.post(
-      "https://socommercenodejs.herokuapp.com/api/publicstream", 
-      :headers => { 'Content-Type' => 'application/json' },
-      :body => tweet_data(status.text, @user_id).to_json
-      )
-  puts @result
-end
+    tenant_user_id = 3139928784
+    client = TweetStream::Client.new  
+    # daemon.on_inited do
+    #   ActiveRecord::Base.connection.reconnect!
+    #   ActiveRecord::Base.logger = Logger.new(File.open(log, 'a'))
+    # end
+    # client.userstream do |status|
+    TweetStream::Client.new.follow(tenant_user_id) do |status|
+      puts status.text
+      @user_id = status.user.id  
+      @result = HTTParty.post(
+          "https://socommercenodejs.herokuapp.com/api/publicstream", 
+          :headers => { 'Content-Type' => 'application/json' },
+          :body => tweet_data(status.text, @user_id).to_json
+          )
+      puts @result
+      # @data = status.text.split(",")
+      # if(status.text.include?('@anbullavignesh') && (@data.length > 2))
+      if @result.present?
+       puts "creating order"
+       Order.create(name: @data[0], movie_name: @data[0].sub!("@anbullavignesh"," "),theatre_name: @data[1], no_of_seats: @data[2], time: @data[3])   
+       message = "Your ticket has been booked, click on the link below to check your ticket status and for other offers. https://socommerce.herokuapp.com/orders/track_order"
+       cli = initialize_rest_api
+       send_message @user_id, message, cli
+      end
+    end
   end
 
   def tweet_data tweet, id
