@@ -50,7 +50,7 @@ private
   end
 
   def sort_column
-    columns = %w[name description]
+    columns = %w[name movie_name theatre_name no_of_seats time]
     columns[params[:iSortCol_0].to_i]
   end
 
