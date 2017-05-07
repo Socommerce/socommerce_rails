@@ -19,6 +19,7 @@ private
   def data
     orders.map do |order|
       [
+        order.name,
         order.movie_name,
         order.theatre_name,
         order.no_of_seats,
