@@ -17,6 +17,12 @@ Rails.application.routes.draw do
 
   mount Sidekiq::Web, at: '/sidekiq'
 
+  namespace :api do
+    namespace :v1 do
+      post 'send_message' => 'orders/send_message'
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
