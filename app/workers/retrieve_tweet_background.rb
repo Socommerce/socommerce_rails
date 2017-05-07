@@ -49,8 +49,10 @@ end
       # @data = status.text.split(",")
       # if(status.text.include?('@anbullavignesh') && (@data.length > 2))
       if @result.present?
-       puts "creating order"
-       Order.create(name: @result['twitter_user_name'], movie_name: @result['movies_list'], theatre_name: @result['theaters'], no_of_seats: @result['no_of_ticket'], time: @result['timing'])   
+        if @result['order'] == true
+          puts "creating order"
+          Order.create(name: @result['twitter_user_name'], movie_name: @result['movies_list'], theatre_name: @result['theaters'], no_of_seats: @result['no_of_ticket'], time: @result['timing'])   
+        end
        message = @result['dm_message']
        cli = initialize_rest_api
        send_message @user_id, message, cli
