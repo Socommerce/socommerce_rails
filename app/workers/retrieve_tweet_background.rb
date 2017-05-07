@@ -2,7 +2,7 @@ class RetrieveTweetBackground
   include Sidekiq::Worker
   sidekiq_options queue: "tweet"
 
-  def perform
+  def perform user_id
 # ENV["RAILS_ENV"] ||= "development"
 # root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 # require File.join(root, 'environment')
@@ -26,7 +26,7 @@ end
 #   binding.pry
 #   puts status.text
 # end
-    tenant_user_id = current_user.twitter_id.to_i
+    tenant_user_id = User.find(user_id).twitter_id.to_i
     client = TweetStream::Client.new  
     # daemon.on_inited do
     #   ActiveRecord::Base.connection.reconnect!
@@ -36,30 +36,33 @@ end
     TweetStream::Client.new.follow(tenant_user_id) do |status|
       puts status.text
       puts status.user.id
+      puts status.user.name
       puts "Requesting node"
       @user_id = status.user.id  
+      @user_name = status.user.name
       @result = HTTParty.post(
           "https://socommercenodejs.herokuapp.com/api/publicstream", 
           :headers => { 'Content-Type' => 'application/json' },
-          :body => tweet_data(status.text, @user_id).to_json
+          :body => tweet_data(status.text, @user_id, @user_name).to_json
           )
       puts @result
       # @data = status.text.split(",")
       # if(status.text.include?('@anbullavignesh') && (@data.length > 2))
       if @result.present?
        puts "creating order"
-       Order.create(name: @data[0], movie_name: @data[0].sub!("@anbullavignesh"," "),theatre_name: @data[1], no_of_seats: @data[2], time: @data[3])   
-       message = "Your ticket has been booked, click on the link below to check your ticket status and for other offers. https://socommerce.herokuapp.com/orders/track_order"
+       Order.create(name: @result['twitter_user_name'], movie_name: @result['movies_list'], theatre_name: @result['theaters'], no_of_seats: @result['no_of_ticket'], time: @result['timing'])   
+       message = @result['dm_message']
        cli = initialize_rest_api
        send_message @user_id, message, cli
       end
     end
   end
 
-  def tweet_data tweet, id
+  def tweet_data tweet, id, nam
     {
       "tweet_detail": tweet,
-      "user_id": id
+      "user_id": id,
+      "user_name": nam
     }
   end
 
